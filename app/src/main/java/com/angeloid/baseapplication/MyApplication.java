@@ -18,7 +18,8 @@ public class MyApplication extends Application{
         if(LeakCanary.isInAnalyzerProcess(this)){
             return;
         }
-        BaseManager.init(this,"---LogTag---",true);
+        LeakCanary.install(this);
+        BaseManager.init(this,"---BraveMade---",true);
         HttpManager.init(this);
     }
 }

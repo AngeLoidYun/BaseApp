@@ -6,6 +6,8 @@ import com.angeloid.mvplibrary.BasePresenter;
 import com.angeloid.mvplibrary.MvpActivity;
 import com.blankj.utilcode.util.ToastUtils;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Angeloid
  * email:angeloidYun@gmail.com
@@ -24,7 +26,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends MvpActivity<
      *
      * @return 相应的presenter
      */
-    public abstract P initPresenter();
+    @Override
+    protected abstract P initPresenter();
 
     @Override
     public void showLoading() {

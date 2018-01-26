@@ -27,5 +27,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile project(path: ':library-base')
     compile project(path: ':library-net')
-    implementation project(':library-mvp')
+    compile project(path: ':library-mvp')
 }

@@ -13,7 +13,7 @@ public class RetrofitClient {
     /**
      * 网络请求基础URL
      */
-    public static String API_SERVER_BASE_URL = "http://www.baidu.com/";
+    public static String API_SERVER_BASE_URL = "http://10.100.2.32/api/v3/apps/";
 
     public static Retrofit mRetrofit;
 
