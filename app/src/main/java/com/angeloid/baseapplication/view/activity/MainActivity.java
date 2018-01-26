@@ -21,8 +21,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     Button getApp;
     @BindView(R.id.tv_getapp)
     TextView tvGetApp;
-
-
     @OnClick(R.id.btn_getapp)
     void getApp() {
         presenter.getAppData();
