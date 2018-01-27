@@ -22,5 +22,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:26.+'
+    compile 'me.yokeyword:fragmentation:1.2.5'
     compile project(':library-net')
 }

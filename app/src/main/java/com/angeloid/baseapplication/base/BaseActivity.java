@@ -4,9 +4,6 @@ import android.os.Bundle;
 
 import com.angeloid.mvplibrary.BasePresenter;
 import com.angeloid.mvplibrary.MvpActivity;
-import com.blankj.utilcode.util.ToastUtils;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by Angeloid
@@ -31,11 +28,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends MvpActivity<
 
     @Override
     public void showLoading() {
-        ToastUtils.showShort("showLoading");
+
     }
 
     @Override
     public void hideLoading() {
-        ToastUtils.showShort("hideLoading");
+
     }
 }

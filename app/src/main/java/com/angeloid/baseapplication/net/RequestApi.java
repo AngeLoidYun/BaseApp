@@ -1,16 +1,16 @@
 package com.angeloid.baseapplication.net;
 
 import com.angeloid.baseapplication.bean.CategoryBean;
+import com.angeloid.baseapplication.bean.SearchResponse;
 import com.angeloid.baseapplication.bean.base.HttpResponse;
 import com.angeloid.baseapplication.bean.request.RequestBean;
+import com.angeloid.baseapplication.bean.request.SearchRequest;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * @author yunjw
@@ -22,4 +22,7 @@ import retrofit2.http.Query;
 public interface RequestApi {
     @POST("category/list")
     Observable<HttpResponse<List<CategoryBean>>> getApp(@Body RequestBean requestBean);
+
+    @POST("apps/search")
+    Observable<HttpResponse<SearchResponse>> getSearchResponse(@Body SearchRequest searchRequest);
 }

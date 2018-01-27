@@ -3,14 +3,15 @@ package com.angeloid.mvplibrary;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * Created by Angeloid
  * email:angeloidYun@gmail.com
  * wechat:flydexin
  */
-public abstract class MvpActivity<P extends  BasePresenter>extends AppCompatActivity implements BaseView{
+public abstract class MvpActivity<P extends  BasePresenter>extends SupportActivity implements BaseView{
     protected P presenter;
     public Context mContext;
 

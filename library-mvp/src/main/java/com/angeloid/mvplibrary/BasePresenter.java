@@ -27,6 +27,7 @@ public class BasePresenter<T extends BaseView> {
         unDisposable();
     }
 
+
     //-----------------分割线---------------------
     //以下下为配合RxJava2+retrofit2使用的
 

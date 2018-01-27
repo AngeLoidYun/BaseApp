@@ -1,27 +1,24 @@
 package com.angeloid.baseapplication.view.activity;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import com.angeloid.baseapplication.R;
 import com.angeloid.baseapplication.base.BaseActivity;
-import com.angeloid.baseapplication.bean.CategoryBean;
 import com.angeloid.baseapplication.presenter.MainPresenter;
-import com.angeloid.baseapplication.view.method.MainView;
-import com.blankj.utilcode.util.ToastUtils;
+import com.angeloid.baseapplication.view.fragment.MainFragment;
+import com.angeloid.baseapplication.view.method.MainActivityView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
-    @BindView(R.id.btn_getapp)
-    Button getApp;
-    @BindView(R.id.tv_getapp)
-    TextView tvGetApp;
-    @OnClick(R.id.btn_getapp)
+public class MainActivity extends BaseActivity<MainPresenter> implements MainActivityView {
+    @BindView(R.id.fl_container)
+    FrameLayout mainContainer;
+
+
     void getApp() {
         presenter.getAppData();
     }
@@ -31,6 +28,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        if(findFragment(MainFragment.class) == null){
+            loadRootFragment(R.id.fl_container,MainFragment.newInstance());
+        }
     }
 
 
@@ -44,15 +44,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         super.showLoading();
     }
 
-
     @Override
-    public void showAppDetail(CategoryBean categoryBean) {
-        tvGetApp.setText(categoryBean.toString());
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
     }
 
     @Override
-    public void showToast(String string) {
-        ToastUtils.showShort(string);
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultHorizontalAnimator();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.angeloid.baseapplication.view.method;
 
-import com.angeloid.baseapplication.bean.CategoryBean;
 import com.angeloid.mvplibrary.BaseView;
 
 /**
@@ -10,7 +9,6 @@ import com.angeloid.mvplibrary.BaseView;
  *         (#^.^#)
  */
 
-public interface MainView extends BaseView {
-    void showAppDetail(CategoryBean categoryBean);
-    void showToast(String string);
+public interface MainActivityView extends BaseView {
+
 }

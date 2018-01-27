@@ -2,15 +2,16 @@ package com.angeloid.mvplibrary;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
+
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by Angeloid
  * email:angeloidYun@gmail.com
  * wechat:flydexin
  */
-public abstract class MvpFragment<P extends BasePresenter> extends Fragment {
+public abstract class MvpFragment<P extends BasePresenter> extends SupportFragment implements BaseView{
     protected P presenter;
 
     @Override
@@ -22,11 +23,35 @@ public abstract class MvpFragment<P extends BasePresenter> extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if(presenter != null){
-            presenter.detachView();
+        if(checkPresenter()){
             presenter = null;
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(hidden){
+            if(checkPresenter()){
+                presenter.unDisposable();
+            }
+        }
+        super.onHiddenChanged(hidden);
+    }
+
     protected abstract P initPresenter();
+
+    protected boolean checkPresenter(){
+        return presenter != null;
+    }
+    @Override
+    public abstract void showLoading();
+
+    @Override
+    public abstract void hideLoading();
 }

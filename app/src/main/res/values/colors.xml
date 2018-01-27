@@ -3,4 +3,51 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="tab_unselect">#c9c9c9</color>
+
+
+
+
+    <color name="black">#000000</color>
+    <color name="black2">#333333</color>
+    <color name="white">#ffffff</color>
+    <color name="translucent_background">#60000000</color>
+    <color name="text_color">#838B8B</color>
+    <color name="download_text">#548B54</color>
+    <color name="red_color">#ff5454</color>
+    <color name="green">#66c600</color>
+    <color name="ececec">#ececec</color>
+    <color name="e1e1e1">#e1e1e1</color>
+    <color name="zhezhao">#3f000000</color>
+    <color name="bbbff">#3bbbff</color>
+    <color name="bdbdbd">#bdbdbd</color>
+
+
+    <!-- toolbar text -->
+    <color name="toolbar_text_color_normal">#CFCFCF</color>
+    <color name="toolbar_text_color_select">#EE9A49</color>
+
+    <color name="main_color">#d8d8d8</color>
+    <color name="_00e0e9ff">#00e0e9ff</color>
+    <color name="_1ee0e9ff">#1ee0e9ff</color>
+    <color name="gray">#999999</color>
+    <color name="bcbcbc">#bcbcbc</color>
+    <color name="blues">#4f63a8</color>
+    <color name="bawu">#858585</color>
+
+    <color name="dialog_title_text_col">#333333</color>
+    <color name="dialog_message_txt_col">#858585</color>
+    <color name="dialog_btn_txt_col">#006bc6</color>
+    <color name="f3f3f3">#f3f3f3</color>
+
+    <color name="update_version_content">#2d2d2d</color>
+    <color name="dialog_bg">#00000000</color>
+    <color name="orange">#f48f37</color>
+    <color name="blue">#078ae5</color>
+
+    <!-- 下载按钮字体颜色 -->
+    <color name="open">#0e9900</color>
+    <color name="install">#f08d00</color>
+    <color name="update">#a700d1</color>
 </resources>
