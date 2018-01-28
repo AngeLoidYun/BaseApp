@@ -1,4 +1,4 @@
-package com.angeloid.baseapplication.bean;
+package com.angeloid.baseapplication.bean.response;
 
 import java.util.List;
 

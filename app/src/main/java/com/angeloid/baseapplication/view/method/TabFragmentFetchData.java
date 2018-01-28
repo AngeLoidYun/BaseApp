@@ -13,14 +13,12 @@ public interface TabFragmentFetchData {
     /**
      * 获取初始数据
      *
-     * @param searchOriginRequest
      */
-    public void fetchOriginData(SearchRequest searchOriginRequest);
+    public void fetchOriginData();
 
     /**
      * 获取更多数据
      *
-     * @param searchMoreRequest
      */
-    public void fetchMoreData(SearchRequest searchMoreRequest);
+    public void fetchMoreData();
 }

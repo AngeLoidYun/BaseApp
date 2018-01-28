@@ -2,6 +2,7 @@ package com.angeloid.baseapplication.view.fragment;
 
 import android.os.Bundle;
 
+import com.angeloid.baseapplication.bean.TabType;
 import com.angeloid.baseapplication.presenter.MainTabFragmentPresenter;
 
 /**
@@ -15,6 +16,11 @@ public class MainAllFragment extends BaseMainTabFragment<MainTabFragmentPresente
     @Override
     protected MainTabFragmentPresenter initPresenter() {
         return new MainTabFragmentPresenter(this);
+    }
+
+    @Override
+    protected TabType initTabType() {
+        return TabType.ALL;
     }
 
 

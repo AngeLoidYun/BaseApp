@@ -1,6 +1,7 @@
 package com.angeloid.baseapplication.presenter;
 
-import com.angeloid.baseapplication.bean.SearchResponse;
+import com.angeloid.baseapplication.bean.TabType;
+import com.angeloid.baseapplication.bean.response.SearchResponse;
 import com.angeloid.baseapplication.bean.base.HttpResponse;
 import com.angeloid.baseapplication.bean.request.SearchRequest;
 import com.angeloid.baseapplication.net.HttpUtils;
@@ -17,15 +18,30 @@ import com.orhanobut.logger.Logger;
  *         (#^.^#)
  */
 
-public class MainTabFragmentPresenter extends BasePresenter<MainTabFragmentView> implements TabFragmentFetchData{
+public class MainTabFragmentPresenter extends BasePresenter<MainTabFragmentView> implements TabFragmentFetchData {
+    /**
+     * 当前页码
+     */
+    protected int mCurrentPageNum = 0;
+    /**
+     * 当前Tab型号
+     *
+     * @see TabType 在这里可以看到类型对应push到服务器的编号
+     */
+    private TabType tabType;
+
+    public void setTabType(TabType tabType) {
+        this.tabType = tabType;
+    }
+
+
     public MainTabFragmentPresenter(MainTabFragmentView mainTabFragmentView) {
         super(mainTabFragmentView);
     }
 
 
-
     @Override
-    public void fetchOriginData(SearchRequest searchOriginRequest) {
+    public void fetchOriginData() {
         Logger.i("fetchOriginData");
         AbsRxCallback<HttpResponse<SearchResponse>> appCallback = new AbsRxCallback<HttpResponse<SearchResponse>>() {
             @Override
@@ -34,7 +50,7 @@ public class MainTabFragmentPresenter extends BasePresenter<MainTabFragmentView>
                 /*
                 加载成功咯
                  */
-                mView.setMainData(model.getData().getData_list());
+                mView.setOriginData(model.getData().getData_list());
             }
 
             @Override
@@ -42,7 +58,7 @@ public class MainTabFragmentPresenter extends BasePresenter<MainTabFragmentView>
                 /*
                 芽儿，这咋失败了呢
                  */
-                mView.setMainDataFailed(errorCode,errorMsg);
+                mView.setOriginDataFailed(errorCode, errorMsg);
             }
 
             @Override
@@ -50,12 +66,12 @@ public class MainTabFragmentPresenter extends BasePresenter<MainTabFragmentView>
 
             }
         };
-        HttpUtils.getSearchResponse(searchOriginRequest,appCallback);
+        HttpUtils.getSearchResponse(new SearchRequest(1, 0), appCallback);
         addDisposable(appCallback);
     }
 
     @Override
-    public void fetchMoreData(SearchRequest searchMoreRequest) {
+    public void fetchMoreData() {
 
     }
 }

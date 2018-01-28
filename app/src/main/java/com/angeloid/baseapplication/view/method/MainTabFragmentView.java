@@ -1,6 +1,6 @@
 package com.angeloid.baseapplication.view.method;
 
-import com.angeloid.baseapplication.bean.SearchResponseDetail;
+import com.angeloid.baseapplication.bean.response.SearchResponseDetail;
 import com.angeloid.mvplibrary.BaseView;
 
 import java.util.List;
@@ -13,8 +13,16 @@ import java.util.List;
  */
 
 public interface MainTabFragmentView extends BaseView {
+    /**
+     * 设置首批数据成功
+     * @param responseDetails 数据
+     */
+    void setOriginData(List<SearchResponseDetail> responseDetails);
 
-    void setMainData(List<SearchResponseDetail> responseDetails);
-
-    void setMainDataFailed(String code,String errorMsg);
+    /**
+     * 设置首批数据失败
+     * @param code 错误码
+     * @param errorMsg 错误信息
+     */
+    void setOriginDataFailed(String code,String errorMsg);
 }

@@ -44,6 +44,10 @@ public abstract class MvpFragment<P extends BasePresenter> extends SupportFragme
         super.onHiddenChanged(hidden);
     }
 
+    /**
+     * 初始化Presenter
+     * @return presenter
+     */
     protected abstract P initPresenter();
 
     protected boolean checkPresenter(){

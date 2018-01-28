@@ -5,6 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.angeloid.baseapplication.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +30,8 @@ public class MainTabAdapter extends RecyclerView.Adapter<MainTabAdapter.MainTabA
 
     @Override
     public MainTabAdapterVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater.from(mContext).inflate()
-        return new MainTabAdapterVH();
+        View v = LayoutInflater.from(mContext).inflate(R.layout.tab_item, parent, false);
+        return new MainTabAdapterVH(v);
     }
 
     @Override
@@ -36,10 +41,20 @@ public class MainTabAdapter extends RecyclerView.Adapter<MainTabAdapter.MainTabA
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 10;
     }
 
     static class MainTabAdapterVH extends RecyclerView.ViewHolder {
+        @BindView(R.id.tab_item_iv)
+        public ImageView itemIv;
+        @BindView(R.id.tab_item_title)
+        public TextView itemTitle;
+        @BindView(R.id.tab_item_rating)
+        public RatingBar itemRatingBar;
+        @BindView(R.id.tab_item_type)
+        public TextView itemType;
+        @BindView(R.id.tab_item_size)
+        public TextView itemSize;
 
         public MainTabAdapterVH(View itemView) {
             super(itemView);

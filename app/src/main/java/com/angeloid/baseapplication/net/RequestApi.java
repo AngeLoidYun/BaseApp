@@ -1,7 +1,7 @@
 package com.angeloid.baseapplication.net;
 
-import com.angeloid.baseapplication.bean.CategoryBean;
-import com.angeloid.baseapplication.bean.SearchResponse;
+import com.angeloid.baseapplication.bean.response.CategoryBean;
+import com.angeloid.baseapplication.bean.response.SearchResponse;
 import com.angeloid.baseapplication.bean.base.HttpResponse;
 import com.angeloid.baseapplication.bean.request.RequestBean;
 import com.angeloid.baseapplication.bean.request.SearchRequest;
