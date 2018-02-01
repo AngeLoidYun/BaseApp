@@ -9,8 +9,13 @@ import android.app.Application;
  */
 public class HttpManager {
     private static Application App;
-    public static void init(Application app){
+    /**
+     * 网络请求基础URL
+     */
+    public static String API_SERVER_BASE_URL;
+    public static void init(Application app,String baseUrl){
         App =app;
+        API_SERVER_BASE_URL = baseUrl;
     }
 
     public static Application getApp(){

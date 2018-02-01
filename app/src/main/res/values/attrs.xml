@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StarBar">
+        <attr name="background_default" format="reference"/>
+        <attr name="background_full" format="reference"/>
+        <attr name="starMargin" format="dimension"/>
+        <attr name="canSwipe" format="boolean"/>
+        <attr name="starCount" format="integer"/>
+        <attr name="starNum" format="integer"/>
+    </declare-styleable>
+</resources>

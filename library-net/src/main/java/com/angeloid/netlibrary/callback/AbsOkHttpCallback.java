@@ -29,16 +29,19 @@ public abstract class AbsOkHttpCallback<T> implements
     /**
      * 成功
      */
+    @Override
     public abstract void onSuccess(T result);
 
     /**
      * 失败
      */
+    @Override
     public abstract void onFail(String errorCode, String errorMsg);
 
     /**
      * 完成
      */
+    @Override
     public abstract void onFinish();
 
     private static final String TAG = "OKhttpCallBack";

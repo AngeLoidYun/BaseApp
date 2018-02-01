@@ -25,4 +25,6 @@ public interface RequestApi {
 
     @POST("apps/search")
     Observable<HttpResponse<SearchResponse>> getSearchResponse(@Body SearchRequest searchRequest);
+
+
 }

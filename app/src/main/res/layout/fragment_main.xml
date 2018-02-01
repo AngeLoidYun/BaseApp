@@ -2,11 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/mainf_topline">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置"
+        android:id="@+id/mainf_menu"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="扫码"
+        android:id="@+id/mainf_scan"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>
 
 <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/mainf_tabcontainer"
+    android:layout_below="@id/mainf_topline">
     <com.angeloid.baseapplication.customview.SelectBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/y118"

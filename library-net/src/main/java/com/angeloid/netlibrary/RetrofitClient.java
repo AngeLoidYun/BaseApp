@@ -10,10 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * wechat:flydexin
  */
 public class RetrofitClient {
-    /**
-     * 网络请求基础URL
-     */
-    public static String API_SERVER_BASE_URL = "http://10.100.2.32/api/v3/apps/";
+
 
     public static Retrofit mRetrofit;
 
@@ -24,7 +21,7 @@ public class RetrofitClient {
     public static Retrofit create(){
         if(mRetrofit == null){
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl(API_SERVER_BASE_URL)
+                    .baseUrl(HttpManager.API_SERVER_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(OkHttpUtils.getUnsafeHttpClient())

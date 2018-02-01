@@ -1,6 +1,7 @@
 package com.angeloid.baseapplication.view.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.angeloid.baseapplication.R;
@@ -19,9 +20,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainAct
     FrameLayout mainContainer;
 
 
-    void getApp() {
-        presenter.getAppData();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainAct
         if(findFragment(MainFragment.class) == null){
             loadRootFragment(R.id.fl_container,MainFragment.newInstance());
         }
+        mainContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.getAppData();
+            }
+        });
     }
+
 
 
     @Override
@@ -59,4 +64,5 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainAct
         presenter.detachView();
         super.onDestroy();
     }
+
 }

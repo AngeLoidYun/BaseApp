@@ -66,7 +66,9 @@ public class MainTabFragmentPresenter extends BasePresenter<MainTabFragmentView>
 
             }
         };
-        HttpUtils.getSearchResponse(new SearchRequest(1, 0), appCallback);
+        SearchRequest searchRequest = new SearchRequest(1,0);
+        searchRequest.setInstall_position(tabType.getTypeNumToServer());
+        HttpUtils.getSearchResponse(searchRequest, appCallback);
         addDisposable(appCallback);
     }
 

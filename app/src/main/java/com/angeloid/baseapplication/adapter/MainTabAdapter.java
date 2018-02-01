@@ -6,10 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.angeloid.baseapplication.R;
+import com.angeloid.baseapplication.bean.TabType;
+import com.angeloid.baseapplication.bean.response.SearchResponseDetail;
+import com.bumptech.glide.Glide;
+import com.hedgehog.ratingbar.RatingBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,9 +29,27 @@ import butterknife.ButterKnife;
 
 public class MainTabAdapter extends RecyclerView.Adapter<MainTabAdapter.MainTabAdapterVH> {
     private Context mContext;
+    private TabType tabType;
 
-    public MainTabAdapter(Context mContext) {
+    public MainTabAdapter(Context mContext,TabType tabType) {
         this.mContext = mContext;
+        this.tabType = tabType;
+    }
+    private List<SearchResponseDetail> searchResponseDetails = new ArrayList<>();
+
+    public void setData(List<SearchResponseDetail> searchResponseDetailList){
+        clearData();
+        searchResponseDetails.addAll(searchResponseDetailList);
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<SearchResponseDetail> searchResponseDetailList){
+        searchResponseDetails.addAll(searchResponseDetailList);
+        notifyDataSetChanged();
+    }
+    public void clearData(){
+        searchResponseDetails.clear();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -36,12 +60,16 @@ public class MainTabAdapter extends RecyclerView.Adapter<MainTabAdapter.MainTabA
 
     @Override
     public void onBindViewHolder(MainTabAdapterVH holder, int position) {
-
+        holder.itemTitle.setText(searchResponseDetails.get(position).getApp_name());
+        holder.itemStarBar.setStar((int) searchResponseDetails.get(position).getStar());
+        Glide.with(mContext).load(searchResponseDetails.get(position).getIcon_url()).into(holder.itemIv);
+        holder.itemType.setText(tabType.getTypeNumString());
+        holder.itemSize.setText(searchResponseDetails.get(position).getFile_size());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return searchResponseDetails.size();
     }
 
     static class MainTabAdapterVH extends RecyclerView.ViewHolder {
@@ -50,7 +78,7 @@ public class MainTabAdapter extends RecyclerView.Adapter<MainTabAdapter.MainTabA
         @BindView(R.id.tab_item_title)
         public TextView itemTitle;
         @BindView(R.id.tab_item_rating)
-        public RatingBar itemRatingBar;
+        public RatingBar itemStarBar;
         @BindView(R.id.tab_item_type)
         public TextView itemType;
         @BindView(R.id.tab_item_size)

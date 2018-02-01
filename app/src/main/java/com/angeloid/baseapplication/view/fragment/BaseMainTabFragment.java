@@ -14,6 +14,8 @@ import com.angeloid.baseapplication.base.BaseFragment;
 import com.angeloid.baseapplication.bean.TabType;
 import com.angeloid.baseapplication.bean.response.SearchResponseDetail;
 import com.angeloid.baseapplication.presenter.MainTabFragmentPresenter;
+import com.angeloid.baseapplication.view.event.TabSelectedEvent;
+import com.angeloid.baseapplication.view.event.UpdateNumberEvent;
 import com.angeloid.baseapplication.view.method.MainTabFragmentView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.orhanobut.logger.Logger;
@@ -21,10 +23,14 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 
 /**
  * @author yunjw
@@ -46,7 +52,10 @@ public abstract class BaseMainTabFragment<P extends MainTabFragmentPresenter> ex
     protected RecyclerView mainTabRecyclerView;
 
     private MainTabAdapter mainTabAdapter;
-
+    /**
+     * 是否初始化完成
+     */
+    private boolean isInited = false;
 
     @Nullable
     @Override
@@ -64,7 +73,8 @@ public abstract class BaseMainTabFragment<P extends MainTabFragmentPresenter> ex
     }
 
     private void initView() {
-        mainTabAdapter = new MainTabAdapter(getContext());
+        EventBusActivityScope.getDefault(_mActivity).register(this);
+        mainTabAdapter = new MainTabAdapter(getContext(),initTabType());
         mainTabRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         mainTabRecyclerView.setAdapter(mainTabAdapter);
 //        smartRefreshLayout.setEnableLoadmore(false);
@@ -80,6 +90,17 @@ public abstract class BaseMainTabFragment<P extends MainTabFragmentPresenter> ex
         });
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTabSelected(TabSelectedEvent tabSelectedEvent){
+        if(tabSelectedEvent.getPosition() == initTabType().getIndex()){
+            if (!isInited){
+                smartRefreshLayout.autoRefresh();
+            }else if(tabSelectedEvent.isReselect()){
+                smartRefreshLayout.autoRefresh();
+            }
+        }
+    }
+
 
     public void fetchOriginData() {
         presenter.fetchOriginData();
@@ -92,8 +113,10 @@ public abstract class BaseMainTabFragment<P extends MainTabFragmentPresenter> ex
 
     @Override
     public void setOriginData(List<SearchResponseDetail> responseDetails) {
-
         ToastUtils.showShort("有数据辣！");
+        mainTabAdapter.setData(responseDetails);
+        isInited = true;
+        EventBusActivityScope.getDefault(_mActivity).post(new UpdateNumberEvent(initTabType()));
         smartRefreshLayout.finishRefresh();
     }
 
@@ -111,5 +134,11 @@ public abstract class BaseMainTabFragment<P extends MainTabFragmentPresenter> ex
             smartRefreshLayout.finishLoadmore();
         }
         super.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onDestroyView() {
+        EventBusActivityScope.getDefault(_mActivity).unregister(this);
+        super.onDestroyView();
     }
 }
