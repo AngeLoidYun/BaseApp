@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 public class HttpUtils {
 
     public static void getAppData(DisposableObserver observer){
-        RetrofitClient.create()
+        RetrofitClient.createOld()
                 .create(RequestApi.class)
                 .getApp(new RequestBean(1))
                 .subscribeOn(Schedulers.io())

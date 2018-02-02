@@ -48,6 +48,6 @@ public class MyApplication extends Application{
         }
         LeakCanary.install(this);
         BaseManager.init(this,"---BraveMade---",true);
-        HttpManager.init(this,GlobalConfig.BASE_URL);
+        HttpManager.init(this,GlobalConfig.BASE_URL,GlobalConfig.BASE_URL_OLD);
     }
 }

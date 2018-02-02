@@ -47,14 +47,14 @@ public class MainFragment extends BaseFragment<MainFragmentPresenter> implements
      *
      */
     @BindView(R.id.mainf_menu)
-    private Button mBtnMenu;
+     Button mBtnMenu;
     @BindView(R.id.mainf_scan)
-    private Button mBtnScan;
+     Button mBtnScan;
     /**
      * 中部选择bar
      */
     @BindView(R.id.mainf_selectbar)
-    private SelectBar mSelectBar;
+     SelectBar mSelectBar;
     //******************************view结束*********************************
 
     @Override

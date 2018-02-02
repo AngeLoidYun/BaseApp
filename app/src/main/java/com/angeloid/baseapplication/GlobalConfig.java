@@ -13,5 +13,11 @@ public class GlobalConfig {
      */
     public static int ITEM_PER_PAGE = 10;
 
-    public static String BASE_URL = "http://10.100.2.32/api/v3/apps/";
+    public static String BASE_URL_FORE = "http://10.100.2.32/api/";
+    public static String BASE_URL = BASE_URL_FORE+"v3/apps/";
+    public static String BASE_URL_OLD = BASE_URL_FORE+"v2/apps/";
+
+
+    public static int CURRENT_ROBOT_TYPE;
+    public static int CURRENT_ROBOT_TYPE_SMALL;
 }

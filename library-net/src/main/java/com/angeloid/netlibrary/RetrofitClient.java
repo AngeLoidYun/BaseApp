@@ -12,21 +12,33 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
 
-    public static Retrofit mRetrofit;
-
+    private static Retrofit mRetrofitV3;
+    private static Retrofit mRetrofitV2;
     /**
      * 获取RetrofitClient
      * @return retrofitClient对象
      */
     public static Retrofit create(){
-        if(mRetrofit == null){
-            mRetrofit = new Retrofit.Builder()
+        if(mRetrofitV3 == null){
+            mRetrofitV3 = new Retrofit.Builder()
                     .baseUrl(HttpManager.API_SERVER_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(OkHttpUtils.getUnsafeHttpClient())
                     .build();
         }
-        return mRetrofit;
+        return mRetrofitV3;
     }
+    public static Retrofit createOld(){
+        if(mRetrofitV2 == null){
+            mRetrofitV2 = new Retrofit.Builder()
+                    .baseUrl(HttpManager.API_SERVER_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(OkHttpUtils.getUnsafeHttpClient())
+                    .build();
+        }
+        return mRetrofitV2;
+    }
+
 }

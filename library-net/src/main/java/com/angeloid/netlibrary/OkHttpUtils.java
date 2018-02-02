@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 
 import java.io.File;
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -13,6 +14,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -26,11 +28,13 @@ import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by Angeloid
@@ -282,11 +286,32 @@ public class OkHttpUtils {
                     return true;
                 }
             };
+            Interceptor httpHeadInterceptor = new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    // 设置多国语言头文件
+                    String language = Locale.getDefault().getLanguage();
+                    String country = Locale.getDefault().getCountry();
+                    if(language.equals("zh")){
+                        if(country.equals("CN")){
+                            language = language+"-"+country;
+                        }else{
+                            language = language+"-TW";
+                        }
+                    }
+                    Request request = chain.request()
+                            .newBuilder()
+                            .addHeader("Accept-Language",language)
+                            .build();
+                    return chain.proceed(request);
+                }
+            };
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.connectTimeout(15000, TimeUnit.MILLISECONDS)
                     .readTimeout(15000,TimeUnit.MILLISECONDS)
                     .writeTimeout(15000,TimeUnit.MILLISECONDS)
                     .addInterceptor(new ChuckInterceptor(HttpManager.getApp()))
+                    .addInterceptor(httpHeadInterceptor)
                     .sslSocketFactory(sslSocketFactory,trustManager)
                     .hostnameVerifier(DO_NOT_VERIFY);
                     okHttpClient = builder.build();
